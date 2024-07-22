@@ -21,5 +21,10 @@ public class Student {
     private String adress;
     private String country;
 
+    @ManyToOne
+    @JoinColumn(name = "exam_id")
+    private Exam exam;
+
+
 
 }

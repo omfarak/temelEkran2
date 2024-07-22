@@ -44,9 +44,9 @@
 <div class = "container my-5 p-5" style="border:1px solid black;">
 
     <h4 class = "text-center"th:text="#{createStudent}"></h4>
-    <form class="col-md-4 offset-md-4" th:action="@{/save}" method="post">
+    <form class="col-md-4 offset-md-4" th:action="@{students/save}" method="post">
         <div class="mb-3">
-            <label for="firstName" class="form-label"th:text="#{name}">İsim</label>
+            <label for="firstName" class="form-label"th:text="#{name}"></label>
             <input type="text" class="form-control" id="firstName" name="firstName">
         </div>
         <div class="mb-3">

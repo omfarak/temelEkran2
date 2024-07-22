@@ -20,10 +20,6 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @GetMapping("/home")
-    public String home(){
-        return "home";
-    }
 
     @GetMapping("/students")
     public ModelAndView students(){
@@ -35,16 +31,10 @@ public class StudentController {
     public String addStudent(){
         return "addStudent";
     }
-    @GetMapping("/schools")
-    public String schools(){
-        return "schools";
-    }
-    @GetMapping("/exams")
-    public String exams(){
-        return "exams";
-    }
 
-    @PostMapping("/save")
+
+
+    @PostMapping("students/save")
     public String studentAdd(@ModelAttribute Student o, BindingResult result){
 //        if (result.hasErrors()) {
 //            return "addStudent";
@@ -65,5 +55,7 @@ public class StudentController {
         model.addAttribute("student",o);
         return "editStudent";
     }
+
+
 
 }
