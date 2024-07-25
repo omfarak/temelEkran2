@@ -10,8 +10,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
+
+@RequestMapping("/admin")
 @Controller
-public class SchoolController {
+public class AdminSchoolController {
 
 
     @Autowired
@@ -23,7 +25,9 @@ public class SchoolController {
         return new ModelAndView("schools","school",list);
     }
 
-    @GetMapping("addSchool")
+
+
+    @GetMapping("/addSchool")
     public String addSchool(){
         return "addSchool";
     }
@@ -31,16 +35,16 @@ public class SchoolController {
     @PostMapping("schools/save")
     public String save(@ModelAttribute School s){
         sService.save(s);
-        return "redirect:/schools";
+        return "redirect:/admin/schools";
     }
 
-    @RequestMapping("deleteSchool/{id}")
+    @RequestMapping("/deleteSchool/{id}")
     public String deleteSchool(@PathVariable("id") int id){
         sService.deleteSchoolById(id);
-        return "redirect:/schools";
+        return "redirect:/admin/schools";
     }
 
-    @RequestMapping("editSchool/{id}")
+    @RequestMapping("/editSchool/{id}")
     public String editSchool(@PathVariable("id") int id, Model model){
         School e = sService.getSchoolById(id);
         model.addAttribute("school",e);

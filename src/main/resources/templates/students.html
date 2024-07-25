@@ -15,24 +15,24 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/home" th:text="#{homePage}"></a>
+        <a class="navbar-brand" href="/admin/home" th:text="#{homePage}"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/students" th:text="#{studentManagement}" ></a>
+                    <a class="nav-link active" aria-current="page" href="/admin/students" th:text="#{studentManagement}" ></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/schools" th:text="#{schoolManagement}"></a>
+                    <a class="nav-link" href="/admin/schools" th:text="#{schoolManagement}"></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/exams" th:text="#{examManagement}"></a>
+                    <a class="nav-link" href="/admin/exams" th:text="#{examManagement}"></a>
                 </li>
             </ul>
             <div>
-                <a class="nav-link text-white" href="/addStudent" th:text="#{createStudent}"></a>
+                <a class="nav-link text-white" href="/admin/addStudent" th:text="#{createStudent}"></a>
             </div>
         </div>
     </div>
@@ -76,8 +76,8 @@
             <td th:text="${o.country}"></td>
             <td>
                 <a class = "color-primary "><i class="fa-solid fa-circle-plus"></i></a>
-                <a style = "color:#7d7d0c" th:href="@{/editStudent/{id}(id=${o.id})}"><i class="fa-solid fa-pen-to-square ms-4"></i></a>
-                <a style = "color:red" th:href="@{/deleteStudent/{id}(id=${o.id})} "><i class="fa-solid fa-trash ms-4"></i></a>
+                <a style = "color:#7d7d0c" th:href="@{/admin/editStudent/{id}(id=${o.id})}"><i class="fa-solid fa-pen-to-square ms-4"></i></a>
+                <a style = "color:red" th:href="@{/admin/deleteStudent/{id}(id=${o.id})} "><i class="fa-solid fa-trash ms-4"></i></a>
             </td>
         </tr>
         </tbody>

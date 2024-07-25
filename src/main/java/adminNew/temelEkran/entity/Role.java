@@ -4,13 +4,11 @@ package adminNew.temelEkran.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
-@Table(name = "schools")
 @Data
-public class School {
+@Table(name = "roles")
+public class Role {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,13 +16,11 @@ public class School {
 
     private String name;
 
-    private String adress;
+    public Role(String name) {
+        this.name = name;
+    }
+    public Role() {
 
-    private String phone;
-
-    private String city;
-
-
-
+    }
 
 }

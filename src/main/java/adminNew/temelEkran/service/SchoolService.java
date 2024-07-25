@@ -32,5 +32,9 @@ public class SchoolService {
 
     }
 
+    public School getSchoolByName(String name){
+        return sRepo.findSchoolByName(name);
+    }
+
 
 }

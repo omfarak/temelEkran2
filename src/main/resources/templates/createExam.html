@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" xml:th="https://www.thymelaf.com">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title th:text="#{createExam}"></title>
+    <script src="https://kit.fontawesome.com/041e042fb6.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/school/home" th:text="#{homePage}"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link " href="/school/exams" th:text="#{examManagement}"></a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+<div class="container my-5 p-5" style="border: 1px solid black">
+    <h4 class = "text-center" th:text="#{scheduleExam}"></h4>
+
+    <form class = "col-md-4 offset-md-4" th:action="@{/school/exams/save}" method="post" th:object="${exam}">
+
+        <div class="mb-3">
+            <label for="name" class="form-label" th:text="#{name}"></label>
+            <input type="" class="form-control" id="name" name="name" readonly th:value="${exam.name}">
+        </div>
+        <div class="mb-3">
+            <label for="duration" class="form-label" th:text="#{duration}"></label>
+            <input type="number" class="form-control" id="duration" name="duration" readonly th:value="${exam.duration}">
+        </div>
+        <div class="mb-3">
+            <label for="course" class="form-label" th:text="#{course}"></label>
+            <select class="form-control" id="course" name="course" readonly th:field="${exam.course}">
+                <option value="A1" th:text="#{a1}"></option>
+                <option value="A2" th:text="#{a2}"></option>
+                <option value="B1" th:text="#{b1}"></option>
+                <option value="B2" th:text="#{b2}"></option>
+                <option value="C1" th:text="#{c1}"></option>
+                <option value="C2" th:text="#{c2}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="language" class="form-label" th:text="#{language}"></label>
+            <input type="text" class="form-control" id="language" name = "language"  readonly th:value="${exam.language}">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label" th:text="#{description}"></label>
+            <input type="text" class="form-control" id="description" name = "description" readonly th:value="${exam.description}">
+        </div>
+        <div class="mb-3">
+            <label for="schoolName" class="form-label" th:text="#{schoolName}"></label>
+            <input type="text" class="form-control" id="schoolName" name = "schoolName" readonly th:value="${username}">
+        </div>
+        <div class="mb-3">
+            <label for="date" class="form-label" th:text="#{date}"></label>
+            <input type="datetime-local" class="form-control" id="date" name = "date" th:value="${exam.date}">
+        </div>
+        <div class="mb-3">
+            <label for="maxParticipants" class="form-label" th:text="#{maxParticipants}"></label>
+            <input type="number" class="form-control" id="maxParticipants" name="maxParticipants" th:value="${exam.maxParticipants}">
+        </div>
+        <div class="mb-3">
+            <label for="registrationDeadline" class="form-label" th:text="#{registrationDeadline}"></label>
+            <input type="datetime-local" class="form-control" id="registrationDeadline" name = "registrationDeadline" th:value="${exam.registrationDeadline}">
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label" th:text="#{price}"></label>
+            <input type="number" class="form-control" id="price" name="price" th:value="${exam.price}">
+        </div>
+
+
+        <button type="submit" class="btn btn-primary" th:text="#{save}"></button>
+    </form>
+</div>
+
+
+
+
+</body>
+</html>

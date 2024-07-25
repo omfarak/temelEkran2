@@ -21,8 +21,6 @@ public class Exam {
     private String description;  // Sınavın açıklaması
     private LocalDateTime date;  // Sınavın tarihi ve saati
     private int duration;  // Sınavın süresi (dakika cinsinden)
-    private String location;  // Sınavın yapılacağı yer
-    //private School school;  // Sınavın düzenlendiği okul (okul nesnesi)
     private int maxParticipants;  // Maksimum katılımcı sayısı
     private int registeredParticipants;  // Kayıtlı öğrenci sayısı
     private boolean isActive;  // Sınavın aktif olup olmadığı
@@ -35,9 +33,17 @@ public class Exam {
     private String status;  // Sınavın durumu (planlandı, tamamlandı, iptal edildi)
     private LocalDateTime createdDate;  // Oluşturulma tarihi
     private LocalDateTime updatedDate;
+    private String schoolName;
 
     @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL)
     private List<Student> registeredStudents = new ArrayList<>();
 
+//    @ManyToOne
+//    @JoinTable(
+//            name = "school_exam",
+//            joinColumns = @JoinColumn(name = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "examId")
+//    )
+//    private School school;
 
 }

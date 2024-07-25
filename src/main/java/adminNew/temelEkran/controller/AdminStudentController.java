@@ -13,8 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
+@RequestMapping("/admin")
 @Controller
-public class StudentController {
+public class AdminStudentController {
 
 
     @Autowired
@@ -34,19 +35,19 @@ public class StudentController {
 
 
 
-    @PostMapping("students/save")
+    @PostMapping("/students/save")
     public String studentAdd(@ModelAttribute Student o, BindingResult result){
 //        if (result.hasErrors()) {
 //            return "addStudent";
 //        }
         studentService.save(o);
-        return "redirect:/students";
+        return "redirect:/admin/students";
     }
 
     @RequestMapping("/deleteStudent/{id}")
     public String deleteMyList(@PathVariable("id") int id){
         studentService.deleteById(id);
-        return "redirect:/students";
+        return "redirect:/admin/students";
     }
 
     @RequestMapping("/editStudent/{id}")

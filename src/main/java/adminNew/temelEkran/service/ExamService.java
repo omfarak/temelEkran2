@@ -5,6 +5,7 @@ import adminNew.temelEkran.repository.ExamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,6 +31,31 @@ public class ExamService {
         return eRepo.findById(id).get();
     }
 
-
+    public List<Exam> getAllDraftExam(){
+        List<Exam> draftExam = new ArrayList<>();
+        int i = 0;
+        List<Exam> l = getAllExam();
+        while(i < l.size()){
+            Exam e = l.get(i);
+            if(e.getMaxParticipants() == 0){
+                draftExam.add(e);
+            }
+            i++;
+        }
+        return draftExam;
+    }
+    public List<Exam> getAllActivetExam(){
+        List<Exam> activeExam = new ArrayList<>();
+        int i = 0;
+        List<Exam> l = getAllExam();
+        while(i < l.size()){
+            Exam e = l.get(i);
+            if(e.getMaxParticipants() != 0){
+                activeExam.add(e);
+            }
+            i++;
+        }
+        return activeExam;
+    }
 
 }

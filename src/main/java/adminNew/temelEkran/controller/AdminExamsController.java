@@ -4,7 +4,6 @@ import adminNew.temelEkran.entity.Exam;
 import adminNew.temelEkran.service.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,7 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-public class ExamsController {
+@RequestMapping("/admin")
+public class AdminExamsController {
 
     @Autowired
     private ExamService eService;
@@ -23,7 +23,7 @@ public class ExamsController {
         return new ModelAndView("exams","exam",list);
     }
 
-    @GetMapping("addExam")
+    @GetMapping("/addExam")
     public String addExam(){
         return "addExam";
     }
@@ -31,21 +31,22 @@ public class ExamsController {
     @PostMapping("/exams/save")
     public String save(@ModelAttribute Exam e){
         eService.save(e);
-        return "redirect:/exams";
+        return "redirect:/admin/exams";
     }
 
-    @RequestMapping("deleteExam/{id}")
+    @RequestMapping("/deleteExam/{id}")
     public String deleteExam(@PathVariable("id") int id){
         eService.deleteById(id);
-        return "redirect:/exams";
+        return "redirect:/admin/exams";
     }
 
-    @RequestMapping("editExam/{id}")
+    @RequestMapping("/editExam/{id}")
     public String editExam(@PathVariable("id") int id, Model model){
         Exam e = eService.getExamById(id);
         model.addAttribute("exam",e);
         return "editExam";
     }
+
 
 
 
