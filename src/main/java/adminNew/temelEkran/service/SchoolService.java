@@ -36,5 +36,9 @@ public class SchoolService {
         return sRepo.findSchoolByName(name);
     }
 
+    public School getSchoolByMail(String mail){
+        return sRepo.findSchoolByMail(mail);
+    }
+
 
 }

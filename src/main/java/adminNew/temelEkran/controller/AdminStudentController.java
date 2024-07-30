@@ -25,7 +25,6 @@ public class AdminStudentController {
     @GetMapping("/students")
     public ModelAndView students(){
         List<Student> list = studentService.getAllStudent();
-        ModelAndView m = new ModelAndView();
         return new ModelAndView("students","student",list);
     }
     @GetMapping("/addStudent")

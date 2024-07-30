@@ -19,8 +19,12 @@ public class AdminExamsController {
 
     @GetMapping("/exams")
     public ModelAndView exams(){
-        List<Exam> list = eService.getAllExam();
-        return new ModelAndView("exams","exam",list);
+        List<Exam> list = eService.getAllDraftExam();
+        List<Exam> list2 = eService.getAllActivetExam();
+        ModelAndView modelAndView = new ModelAndView("exams");
+        modelAndView.addObject("exams", list);
+        modelAndView.addObject("activeExams", list2);
+        return modelAndView;
     }
 
     @GetMapping("/addExam")
@@ -47,6 +51,12 @@ public class AdminExamsController {
         return "editExam";
     }
 
+    @RequestMapping("editActiveExam/{id}")
+    public String editActiveExam(@PathVariable("id") int id, Model model){
+        Exam e = eService.getExamById(id);
+        model.addAttribute("exam",e);
+        return "editActiveExam";
+    }
 
 
 

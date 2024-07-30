@@ -69,7 +69,7 @@
             <td th:text="${o.id}"></td>
             <td th:text="${o.firstName}"></td>
             <td th:text="${o.lastName}"></td>
-            <td th:text="${T(java.time.LocalDate).parse(o.birthDate).format(T(java.time.format.DateTimeFormatter).ofPattern('dd.MM.yyyy'))}">Birth Date</td>
+            <td th:text="${T(java.time.LocalDate).parse(o.birthDate).format(T(java.time.format.DateTimeFormatter).ofPattern('dd.MM.yyyy'))}"></td>
             <td th:text="${o.phone}"></td>
             <td th:text="${o.email}"></td>
             <td th:text="${o.adress}"></td>

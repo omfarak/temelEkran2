@@ -1,7 +1,10 @@
 package adminNew.temelEkran.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 import java.util.*;
@@ -9,6 +12,9 @@ import java.util.*;
 @Entity
 @Table(name = "user")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User {
 
     @Id

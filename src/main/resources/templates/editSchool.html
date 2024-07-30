@@ -46,6 +46,14 @@
             <input type="text" class="form-control" id="name" name="name" th:value="${school.name}">
         </div>
         <div class="mb-3">
+            <label for="mail" class="form-label" th:text="#{email}"></label>
+            <input type="email" class="form-control" id="mail" name="mail" th:value="${school.mail}">
+        </div>
+        <div class="mb-3">
+            <label for="telc_id" class="form-label" th:text="#{telc_id}"></label>
+            <input type="number" class="form-control" id="telc_id" name="telc_id" th:value="${school.telc_id}">
+        </div>
+        <div class="mb-3">
             <label for="adress" class="form-label" th:text="#{adress}"></label>
             <input type="text" class="form-control" id="adress" name="adress" th:value="${school.adress}">
         </div>

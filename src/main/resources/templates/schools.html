@@ -50,6 +50,8 @@
             <tr>
                 <th scope="col" th:text="#{id}"></th>
                 <th scope="col" th:text="#{name}"></th>
+                <th scope="col" th:text="#{email}"></th>
+                <th scope="col" th:text="#{telc_id}"></th>
                 <th scope="col" th:text="#{adress}"></th>
                 <th scope="col" th:text="#{phone}"></th>
                 <th scope="col" th:text="#{city}"></th>
@@ -63,6 +65,8 @@
             <tr th:each="s : ${school}">
                 <td th:text="${s.id}"></td>
                 <td th:text="${s.name}"></td>
+                <td th:text="${s.mail}"></td>
+                <td th:text="${s.telc_id}"></td>
                 <td th:text="${s.adress}"></td>
                 <td th:text="${s.phone}"></td>
                 <td th:text="${s.city}"></td>

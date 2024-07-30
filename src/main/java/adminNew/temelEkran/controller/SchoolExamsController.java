@@ -2,6 +2,7 @@ package adminNew.temelEkran.controller;
 
 
 import adminNew.temelEkran.entity.Exam;
+import adminNew.temelEkran.entity.Prufer;
 import adminNew.temelEkran.entity.School;
 import adminNew.temelEkran.service.ExamService;
 import adminNew.temelEkran.service.SchoolService;
@@ -41,18 +42,63 @@ public class SchoolExamsController {
         return modelAndView;
     }
 
+    /*
     @RequestMapping("/createExam/{id}")
     public String crateExam(@PathVariable("id") int id, Model model){
         Exam e = eService.getExamById(id);
         model.addAttribute("exam",e);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName(); // Kullanıcı adını al
+        String username = authentication.getName();
         //e.setSchool(sService.getSchoolByName(username));
 
         if (authentication != null) {
             model.addAttribute("username", username);
             e.setSchoolName(username);
         }
+        return "createExam";
+    }*/
+
+    /*
+    @RequestMapping("/createExam/{id}")
+    public String createExam(@PathVariable("id") int id, Model model) {
+        Exam e = eService.getExamById(id);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String mail = authentication.getName();
+        School school = sService.getSchoolByMail(mail);
+        String schoolName = school.getName();
+
+        // Get prüfer list by school name
+        List<Prufer> prufers = eService.getAllPruferBySchoolName(schoolName);
+
+        if (authentication != null) {
+            model.addAttribute("username", schoolName);
+            e.setSchoolName(schoolName);
+        }
+
+        model.addAttribute("exam", e);
+        model.addAttribute("prufers", prufers);
+        return "createExam";
+    }
+
+*/
+    @RequestMapping("/createExam/{id}")
+    public String createExam(@PathVariable("id") int id, Model model) {
+        Exam e = eService.getExamById(id);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String mail = authentication.getName();
+        School school = sService.getSchoolByMail(mail);
+        String schoolName = school.getName();
+
+        // Get prüfer list by school name and exam level
+        List<Prufer> prufers = eService.getPruferByExamLevel(schoolName, e.getCourse());
+
+        if (authentication != null) {
+            model.addAttribute("username", schoolName);
+            e.setSchoolName(schoolName);
+        }
+
+        model.addAttribute("exam", e);
+        model.addAttribute("prufers", prufers);
         return "createExam";
     }
 
