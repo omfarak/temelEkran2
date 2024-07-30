@@ -35,10 +35,19 @@
         </div>
     </div>
 </nav>
-<div class = "container text-center my-5">
-    <h1 th:text="#{welcome}"></h1>
-    <h6 th:text="#{message4}"></h6>
-</div>
+    <div class="container mb-3 col mt-5">
+        <div class="col-6 button-left mb-3">
+            <a href="/school/exams" class="btn btn-primary" th:text="#{examManagement}"></a>
+        </div>
+        <div class="col-6 button-right mb-3">
+            <a href="/school/prufer" class="btn btn-primary" th:text="#{pruferList}"></a>
+        </div>
+    </div>
+    <div class = "container text-center my-5">
+        <h1 th:text="#{welcome}"></h1>
+        <h6 th:text="#{message4}"></h6>
+
+    </div>
 
 
 
