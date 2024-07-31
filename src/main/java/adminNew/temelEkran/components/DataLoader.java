@@ -50,7 +50,7 @@ public class DataLoader implements CommandLineRunner {
 
         Role schoolAdminRole = roleRepository.findByName("ROLE_SCHOOLADMIN");
         if (schoolAdminRole == null) {
-            schoolAdminRole = new Role("ROLE_SCHOOL");
+            schoolAdminRole = new Role("ROLE_SCHOOLADMIN");
             roleRepository.save(schoolAdminRole);
         }
 
