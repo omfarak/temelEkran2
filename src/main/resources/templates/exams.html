@@ -94,8 +94,8 @@
                 <td th:text="${e.description}"></td>
                 <td th:text="${e.schriftlichTelcEntryPrice}"></td>
                 <td th:text="${e.schriftlichComissionFeePrice}"></td>
-                <td th:text="${e.mündlicheTelcEntryPrice}"></td>
-                <td th:text="${e.mündlicheComissionFeePrice}"></td>
+                <td th:text="${e.mundlicheTelcEntryPrice}"></td>
+                <td th:text="${e.mundlicheComissionFeePrice}"></td>
                 <td th:text="${e.gesamtlischeTelcEntryPrice}"></td>
                 <td th:text="${e.gesamtlischeComissionFeePrice}"></td>
                 <td>
@@ -122,17 +122,15 @@
                 <th scope="col" th:text="#{course}"></th>
                 <th scope="col" th:text="#{language}"></th>
                 <th scope="col" th:text="#{description}"></th>
-                <th scope="col" th:text="#{schoolName}"></th>
-                <th scope="col" th:text="#{date}"></th>
+                <th scope="col" th:text="#{schriftlichSellingPrice}"></th>
+                <th scope="col" th:text="#{mundlicheComissionFeePrice}"></th>
+                <th scope="col" th:text="#{gesamtlischeComissionFeePrice}"></th>
                 <th scope="col" th:text="#{maxParticipants}"></th>
+                <th scope="col" th:text="#{prufer}"></th>
                 <th scope="col" th:text="#{registrationDeadline}"></th>
-                <th scope="col" th:text="#{price}"></th>
-                <th scope="col" th:text="#{manage}"></th>
-
+                <th scope="col" th:text="#{date}"></th>
             </tr>
             </thead>
-
-
             <tbody>
             <tr th:each="a : ${activeExams}">
                 <td th:text="${a.name}"></td>
@@ -140,17 +138,17 @@
                 <td th:text="${a.course}"></td>
                 <td th:text="${a.language}"></td>
                 <td th:text="${a.description}"></td>
-                <td th:text="${a.schoolName}"></td>
-                <td class="date" th:text="${a.date}"></td>
-                <td th:text="${a.maxParticipants}"></td>
-                <td class="date" th:text="${a.registrationDeadline}"></td>
+                <td th:text="${a.schriftlichSellingPrice}"></td>
+                <td th:text="${a.mundlicheSellingPrice}"></td>
+                <td th:text="${a.gesamtlischeSellingPrice}"></td>
                 <td>
-                    <a style = "color:#7d7d0c" th:href="@{/admin/editActiveExam/{id}(id=${a.examId})}"><i class="fa-solid fa-pen-to-square ms-4"></i></a>
-                    <a style = "color:red" th:href="@{/admin/deleteExam/{id}(id=${a.examId})} "><i class="fa-solid fa-trash ms-4"></i></a>
+                    <span class="text-success" th:text="'Left: ' + (${a.maxParticipants} - ${a.registeredParticipants})"></span>
+                    <br>
+                    <span class="text-danger" th:text="'Registered: ' + ${a.registeredParticipants}"></span>
                 </td>
-
-
-
+                <td th:text="${a.prufer.firstName + ' ' + a.prufer.lastName}"></td>
+                <td class="date" th:text="${a.registrationDeadline}"></td>
+                <td class="date" th:text="${a.date}"></td>
             </tr>
             </tbody>
         </table>

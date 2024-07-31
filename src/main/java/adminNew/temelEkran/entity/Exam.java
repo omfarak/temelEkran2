@@ -44,9 +44,9 @@ public class Exam {
     private int schriftlichTelcEntryPrice;
     private int schriftlichComissionFeePrice;
     private int schriftlichSellingPrice;
-    private int mündlicheTelcEntryPrice;
-    private int mündlicheComissionFeePrice;
-    private int mündlicheSellingPrice;
+    private int mundlicheTelcEntryPrice;
+    private int mundlicheComissionFeePrice;
+    private int mundlicheSellingPrice;
     private int gesamtlischeTelcEntryPrice;
     private int gesamtlischeComissionFeePrice;
     private int gesamtlischeSellingPrice;
