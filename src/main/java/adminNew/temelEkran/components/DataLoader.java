@@ -48,6 +48,14 @@ public class DataLoader implements CommandLineRunner {
             roleRepository.save(studentRole);
         }
 
+        Role schoolAdminRole = roleRepository.findByName("ROLE_SCHOOLADMIN");
+        if (schoolAdminRole == null) {
+            schoolAdminRole = new Role("ROLE_SCHOOL");
+            roleRepository.save(schoolAdminRole);
+        }
+
+
+
         // Kullanıcıları oluşturup rolleri atayın
         if (userRepository.findByUsername("admin") == null) {
             User admin = new User();
@@ -91,6 +99,13 @@ public class DataLoader implements CommandLineRunner {
             school.setUsername("testschool@gmail.com");
             school.setPassword(passwordEncoder.encode("password"));
             school.setRoles(new HashSet<>(Collections.singletonList(schoolRole)));
+            userRepository.save(school);
+        }
+        if (userRepository.findByUsername("testschool@gmail.com.admin") == null) {
+            User school = new User();
+            school.setUsername("testschool@gmail.com.admin");
+            school.setPassword(passwordEncoder.encode("password"));
+            school.setRoles(new HashSet<>(Collections.singletonList(schoolAdminRole)));
             userRepository.save(school);
         }
 

@@ -5,16 +5,14 @@ import adminNew.temelEkran.entity.Exam;
 import adminNew.temelEkran.entity.Prufer;
 import adminNew.temelEkran.entity.School;
 import adminNew.temelEkran.service.ExamService;
+import adminNew.temelEkran.service.PruferService;
 import adminNew.temelEkran.service.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -30,15 +28,25 @@ public class SchoolExamsController {
     @Autowired
     private SchoolService sService;
 
+    @Autowired
+    private PruferService pService;
+
+
+
 
 
     @GetMapping("/exams")
     public ModelAndView exams(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        School s = sService.getSchoolByMail(username);
         List<Exam> list = eService.getAllDraftExam();
         List<Exam> list2 = eService.getAllActivetExam();
+        List<Exam> list3 = eService.getMyListExams(s.getName());
         ModelAndView modelAndView = new ModelAndView("school_exams");
         modelAndView.addObject("draftExams", list);
         modelAndView.addObject("activeExams", list2);
+        modelAndView.addObject("listExam",list3);
         return modelAndView;
     }
 
@@ -103,7 +111,9 @@ public class SchoolExamsController {
     }
 
     @PostMapping("/exams/save")
-    public String save(Exam e){
+    public String save(Exam e,@RequestParam("pruferId") int pruferId){
+        Prufer prufer = pService.getPruferById(pruferId);
+        e.setPrufer(prufer);
         eService.save(e);
         return "redirect:/school/exams";
     }

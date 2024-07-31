@@ -32,11 +32,8 @@
 <div class="container my-5 p-5" style="border: 1px solid black">
     <h4 class="text-center" th:text="#{createExam}"></h4>
 
+    <form class="col-md-4 offset-md-4" th:action="@{/schoolADMIN/addExamsToMyList/save}" method="post" th:object="${exam}">
 
-    <form class="col-md-4 offset-md-4" th:action="@{/school/exams/save}" method="post" th:object="${exam}">
-        <input type="hidden" name="schriftlichTelcEntryPrice" th:value="${exam.schriftlichTelcEntryPrice}">
-        <input type="hidden" name="mündlicheTelcEntryPrice" th:value="${exam.mündlicheTelcEntryPrice}">
-        <input type="hidden" name="gesamtlischeTelcEntryPrice" th:value="${exam.gesamtlischeTelcEntryPrice}">
         <div class="mb-3">
             <label for="name" class="form-label" th:text="#{name}"></label>
             <input type="text" class="form-control" id="name" name="name" readonly th:value="${exam.name}">
@@ -74,7 +71,7 @@
         </div>
         <div class="mb-3">
             <label for="schriftlichSellingPrice" class="form-label" th:text="#{schriftlichSellingPrice}"></label>
-            <input type="number" class="form-control" id="schriftlichSellingPrice" name="schriftlichSellingPrice" readonly th:value="${exam.schriftlichSellingPrice}">
+            <input type="number" class="form-control" id="schriftlichSellingPrice" name="schriftlichSellingPrice" th:value="${exam.schriftlichSellingPrice}">
         </div>
         <div class="mb-3">
             <label for="mündlicheComissionFeePrice" class="form-label" th:text="#{mundlicheComissionFeePrice}"></label>
@@ -82,7 +79,7 @@
         </div>
         <div class="mb-3">
             <label for="mündlicheSellingPrice" class="form-label" th:text="#{mundlicheSellingPrice}"></label>
-            <input type="number" class="form-control" id="mündlicheSellingPrice" name="mündlicheSellingPrice"  readonly th:value="${exam.mündlicheSellingPrice}">
+            <input type="number" class="form-control" id="mündlicheSellingPrice" name="mündlicheSellingPrice" th:value="${exam.mündlicheSellingPrice}">
         </div>
         <div class="mb-3">
             <label for="gesamtlischeComissionFeePrice" class="form-label" th:text="#{gesamtlischeComissionFeePrice}"></label>
@@ -90,28 +87,9 @@
         </div>
         <div class="mb-3">
             <label for="gesamtlischeSellingPrice" class="form-label" th:text="#{gesamtlischeSellingPrice}"></label>
-            <input type="number" class="form-control" id="gesamtlischeSellingPrice" name="gesamtlischeSellingPrice"  readonly th:value="${exam.gesamtlischeSellingPrice}">
-        </div>
-        <div class="mb-3">
-            <label for="prufer" class="form-label" th:text="#{prufer}"></label>
-            <select class="form-control" id="prufer" name="pruferId">
-                <option value="" th:text="#{selectPrufer}"></option>
-                <option th:each="prufer : ${prufers}" th:value="${prufer.id}" th:text="${prufer.firstName + ' ' + prufer.lastName}"></option>
-            </select>
+            <input type="number" class="form-control" id="gesamtlischeSellingPrice" name="gesamtlischeSellingPrice" th:value="${exam.gesamtlischeSellingPrice}">
         </div>
 
-        <div class="mb-3">
-            <label for="date" class="form-label" th:text="#{date}"></label>
-            <input type="datetime-local" class="form-control" id="date" name="date" th:value="${exam.date}">
-        </div>
-        <div class="mb-3">
-            <label for="maxParticipants" class="form-label" th:text="#{maxParticipants}"></label>
-            <input type="number" class="form-control" id="maxParticipants" name="maxParticipants" th:value="${exam.maxParticipants}">
-        </div>
-        <div class="mb-3">
-            <label for="registrationDeadline" class="form-label" th:text="#{registrationDeadline}"></label>
-            <input type="datetime-local" class="form-control" id="registrationDeadline" name="registrationDeadline" th:value="${exam.registrationDeadline}">
-        </div>
 
         <button type="submit" class="btn btn-primary">Save</button>
     </form>

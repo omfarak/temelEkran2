@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -25,12 +27,21 @@ public class SecurityConfig {
     private PasswordEncoder passwordEncoder;
 
     @Bean
+    public RoleHierarchy roleHierarchy() {
+        RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
+        String hierarchy = "ROLE_SCHOOLADMIN > ROLE_SCHOOL";
+        roleHierarchy.setHierarchy(hierarchy);
+        return roleHierarchy;
+    }
+
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/").permitAll();
                     auth.requestMatchers("/admin/**").hasRole("ADMIN");
                     auth.requestMatchers("/school/**").hasRole("SCHOOL");
+                    auth.requestMatchers("/schoolADMIN/**").hasRole("SCHOOLADMIN");
                     auth.requestMatchers("/students/**").hasRole("STUDENTS");
                     auth.anyRequest().authenticated();
                 })

@@ -18,6 +18,9 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         else if(authentication.getAuthorities().contains((new SimpleGrantedAuthority("ROLE_SCHOOL")))){
             response.sendRedirect("/school/home");
         }
+        else if(authentication.getAuthorities().contains((new SimpleGrantedAuthority("ROLE_SCHOOLADMIN")))){
+            response.sendRedirect("/school/home");
+        }
         else if(authentication.getAuthorities().contains((new SimpleGrantedAuthority("ROLE_STUDENT")))){
             response.sendRedirect("/students/home");
         }

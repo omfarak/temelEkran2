@@ -48,12 +48,25 @@ public class ExamService {
         List<Exam> l = getAllExam();
         while(i < l.size()){
             Exam e = l.get(i);
-            if(e.getMaxParticipants() == 0){
+            if(e.getSchoolName() == null){
                 draftExam.add(e);
             }
             i++;
         }
         return draftExam;
+    }
+    public List<Exam> getMyListExams(String schoolName){
+        List<Exam> myListExams = new ArrayList<>();
+        int i = 0;
+        List<Exam> l = getExamsBySchoolName(schoolName);
+        while(i < l.size()){
+            Exam e = l.get(i);
+            if(e.getDate() == null){
+                myListExams.add(e);
+            }
+            i++;
+        }
+        return myListExams;
     }
     public List<Exam> getAllActivetExam(){
         List<Exam> activeExam = new ArrayList<>();
@@ -81,6 +94,10 @@ public class ExamService {
             return new ArrayList<>();
         }
         return LEVELS.subList(index, LEVELS.size());
+    }
+
+    public List<Exam> getExamsBySchoolName(String schoolName){
+        return eRepo.findExamsBySchoolName(schoolName);
     }
 
 

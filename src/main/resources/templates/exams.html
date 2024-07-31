@@ -58,6 +58,7 @@
     <div class="container my-3 text-center">
         <a href="/admin/prufer" class="btn btn-primary" th:text="#{pruferList}"></a>
     </div>
+
     <div class = "container text-center my-5">
         <h1 th:text="#{exams}"></h1>
         <h6 th:text="#{message2}"></h6>
@@ -73,6 +74,12 @@
                 <th scope="col" th:text="#{course}"></th>
                 <th scope="col" th:text="#{language}"></th>
                 <th scope="col" th:text="#{description}"></th>
+                <th scope="col" th:text="#{schriftlichTelcEntryPrice}"></th>
+                <th scope="col" th:text="#{schriftlichComissionFeePrice}"></th>
+                <th scope="col" th:text="#{mundlicheTelcEntryPrice}"></th>
+                <th scope="col" th:text="#{mundlicheComissionFeePrice}"></th>
+                <th scope="col" th:text="#{gesamtlischeTelcEntryPrice}"></th>
+                <th scope="col" th:text="#{gesamtlischeComissionFeePrice}"></th>
                 <th scope="col" th:text="#{edit}"></th>
             </tr>
             </thead>
@@ -85,8 +92,13 @@
                 <td th:text="${e.course}"></td>
                 <td th:text="${e.language}"></td>
                 <td th:text="${e.description}"></td>
+                <td th:text="${e.schriftlichTelcEntryPrice}"></td>
+                <td th:text="${e.schriftlichComissionFeePrice}"></td>
+                <td th:text="${e.mündlicheTelcEntryPrice}"></td>
+                <td th:text="${e.mündlicheComissionFeePrice}"></td>
+                <td th:text="${e.gesamtlischeTelcEntryPrice}"></td>
+                <td th:text="${e.gesamtlischeComissionFeePrice}"></td>
                 <td>
-                    <a class = "color-primary" th:href="@{/createExam/{id}(id=${e.examId})}"><i class="fa-solid fa-circle-plus"></i></a>
                     <a style = "color:#7d7d0c" th:href="@{/admin/editExam/{id}(id=${e.examId})}"><i class="fa-solid fa-pen-to-square ms-4"></i></a>
                     <a style = "color:red" th:href="@{/admin/deleteExam/{id}(id=${e.examId})} "><i class="fa-solid fa-trash ms-4"></i></a>
                 </td>
@@ -132,7 +144,6 @@
                 <td class="date" th:text="${a.date}"></td>
                 <td th:text="${a.maxParticipants}"></td>
                 <td class="date" th:text="${a.registrationDeadline}"></td>
-                <td th:text="${a.price}"></td>
                 <td>
                     <a style = "color:#7d7d0c" th:href="@{/admin/editActiveExam/{id}(id=${a.examId})}"><i class="fa-solid fa-pen-to-square ms-4"></i></a>
                     <a style = "color:red" th:href="@{/admin/deleteExam/{id}(id=${a.examId})} "><i class="fa-solid fa-trash ms-4"></i></a>

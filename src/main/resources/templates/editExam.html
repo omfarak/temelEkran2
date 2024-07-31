@@ -68,6 +68,30 @@
         <label for="description" class="form-label" th:text="#{description}"></label>
         <input type="text" class="form-control" id="description" name = "description" th:value="${exam.description}">
       </div>
+      <div class="mb-3">
+          <label for="schriftlichTelcEntryPrice" class="form-label" th:text="#{schriftlichTelcEntryPrice}"></label>
+          <input type="number" class="form-control" id="schriftlichTelcEntryPrice" name = "schriftlichTelcEntryPrice" th:value="${exam.schriftlichTelcEntryPrice}">
+      </div>
+      <div class="mb-3">
+          <label for="schriftlichComissionFeePrice" class="form-label" th:text="#{schriftlichComissionFeePrice}"></label>
+          <input type="number" class="form-control" id="schriftlichComissionFeePrice" name = "schriftlichComissionFeePrice" th:value="${exam.schriftlichComissionFeePrice}">
+      </div>
+      <div class="mb-3">
+          <label for="mündlicheTelcEntryPrice" class="form-label" th:text="#{mundlicheTelcEntryPrice}"></label>
+          <input type="number" class="form-control" id="mündlicheTelcEntryPrice" name = "mündlicheTelcEntryPrice" th:value="${exam.mündlicheTelcEntryPrice}">
+      </div>
+      <div class="mb-3">
+          <label for="mündlicheComissionFeePrice" class="form-label" th:text="#{mundlicheComissionFeePrice}"></label>
+          <input type="number" class="form-control" id="mündlicheComissionFeePrice" name = "mündlicheComissionFeePrice" th:value="${exam.mündlicheComissionFeePrice}">
+      </div>
+      <div class="mb-3">
+          <label for="gesamtlischeTelcEntryPrice" class="form-label" th:text="#{gesamtlischeTelcEntryPrice}"></label>
+          <input type="number" class="form-control" id="gesamtlischeTelcEntryPrice" name = "gesamtlischeTelcEntryPrice" th:value="${exam.gesamtlischeTelcEntryPrice}">
+      </div>
+      <div class="mb-3">
+          <label for="gesamtlischeComissionFeePrice" class="form-label" th:text="#{gesamtlischeComissionFeePrice}"></label>
+          <input type="number" class="form-control" id="gesamtlischeComissionFeePrice" name = "gesamtlischeComissionFeePrice" th:value="${exam.gesamtlischeComissionFeePrice}">
+      </div>
 
       <button type="submit" class="btn btn-primary" th:text="#{save}"></button>
   </form>

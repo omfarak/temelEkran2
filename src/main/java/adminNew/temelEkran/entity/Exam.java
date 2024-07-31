@@ -31,8 +31,6 @@ public class Exam {
     private int registeredParticipants;  // Kayıtlı öğrenci sayısı
     private boolean isActive;  // Sınavın aktif olup olmadığı
     private LocalDateTime registrationDeadline;  // Kayıt için son tarih
-    private String examType;  // Sınavın türü (yazılı, sözlü, vb.)
-    private double price;  // Sınavın ücreti
     private String course;  // Sınavın ilişkili olduğu kurs (varsa)
     private String language;  // Sınavın yapıldığı dil
     private String examMaterial;  // Sınav materyalleri
@@ -41,8 +39,28 @@ public class Exam {
     private LocalDateTime updatedDate;
     private String schoolName;
 
+    private Boolean inMyList = false;
+
+    private int schriftlichTelcEntryPrice;
+    private int schriftlichComissionFeePrice;
+    private int schriftlichSellingPrice;
+    private int mündlicheTelcEntryPrice;
+    private int mündlicheComissionFeePrice;
+    private int mündlicheSellingPrice;
+    private int gesamtlischeTelcEntryPrice;
+    private int gesamtlischeComissionFeePrice;
+    private int gesamtlischeSellingPrice;
+
+
+
+
     @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL)
     private List<Student> registeredStudents = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "pruferId", referencedColumnName = "id")
+    private Prufer prufer;
+
 
 //    @ManyToOne
 //    @JoinTable(
