@@ -37,12 +37,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/").permitAll();
                     auth.requestMatchers("/admin/**").hasRole("ADMIN");
                     auth.requestMatchers("/school/**").hasRole("SCHOOL");
                     auth.requestMatchers("/schoolADMIN/**").hasRole("SCHOOLADMIN");
-                    auth.requestMatchers("/students/**").hasRole("STUDENTS");
+                    auth.requestMatchers("/student/**").hasRole("STUDENT");
                     auth.anyRequest().authenticated();
                 })
                 .formLogin(form -> form
@@ -50,7 +51,6 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .build();
-
     }
 
     @Bean

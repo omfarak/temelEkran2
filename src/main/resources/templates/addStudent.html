@@ -43,7 +43,7 @@
 
 <div class = "container my-5 p-5" style="border:1px solid black;">
 
-    <h4 class = "text-center"th:text="#{createStudent}"></h4>
+    <h4 class = "text-center" th:text="#{createStudent}"></h4>
     <form class="col-md-4 offset-md-4" th:action="@{/admin/students/save}" method="post">
         <div class="mb-3">
             <label for="firstName" class="form-label"th:text="#{name}"></label>
@@ -68,6 +68,10 @@
         <div class="mb-3">
             <label for="adress" class="form-label"th:text="#{adress}"></label>
             <input type="text" class="form-control" id="adress" name="adress">
+        </div>
+        <div class="mb-3">
+            <label for="postalCode" class="form-label"th:text="#{postalCode}"></label>
+            <input type="number" class="form-control" id="postalCode" name="postalCode">
         </div>
         <div class="mb-3">
             <label for="country" class="form-label"th:text="#{homeCountry}"></label>

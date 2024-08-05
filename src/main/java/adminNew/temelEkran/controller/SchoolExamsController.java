@@ -1,10 +1,9 @@
 package adminNew.temelEkran.controller;
 
 
-import adminNew.temelEkran.entity.Exam;
-import adminNew.temelEkran.entity.Prufer;
-import adminNew.temelEkran.entity.School;
+import adminNew.temelEkran.entity.*;
 import adminNew.temelEkran.service.ExamService;
+import adminNew.temelEkran.service.ExamStudentRegistrationService;
 import adminNew.temelEkran.service.PruferService;
 import adminNew.temelEkran.service.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +29,9 @@ public class SchoolExamsController {
 
     @Autowired
     private PruferService pService;
+
+    @Autowired
+    private ExamStudentRegistrationService esrService;
 
 
 
@@ -116,6 +118,14 @@ public class SchoolExamsController {
         e.setPrufer(prufer);
         eService.save(e);
         return "redirect:/school/exams";
+    }
+
+    @PostMapping("/registeredStudents")
+    public String getRegisteredStudents(@RequestParam("examId") int examId, Model model) {
+        List<ExamStudentRegistration> reg = esrService.getRegistrationsByExamId(examId);
+        System.out.println(reg.get(0).getStudent().getFirstName());
+        model.addAttribute("registeredStudents", reg);
+        return "registeredStudents";
     }
 
 

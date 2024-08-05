@@ -55,6 +55,7 @@
                 <th scope="col" th:text="#{adress}"></th>
                 <th scope="col" th:text="#{phone}"></th>
                 <th scope="col" th:text="#{city}"></th>
+                <th scope="col" th:text="#{postalCode}"></th>
                 <th scope="col" th:text="#{edit}"></th>
 
 
@@ -70,6 +71,7 @@
                 <td th:text="${s.adress}"></td>
                 <td th:text="${s.phone}"></td>
                 <td th:text="${s.city}"></td>
+                <td th:text="${s.postal_code}"></td>
                 <td>
                     <a class = "color-primary "><i class="fa-solid fa-circle-plus"></i></a>
                     <a style = "color:#7d7d0c" th:href="@{/admin/editSchool/{id}(id=${s.id})}"><i class="fa-solid fa-pen-to-square ms-4"></i></a>

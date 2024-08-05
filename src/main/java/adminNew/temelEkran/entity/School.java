@@ -34,6 +34,8 @@ public class School {
 
     private String city;
 
+    private int postal_code;
+
     @OneToMany(mappedBy = "school", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Prufer> prufers = new ArrayList<>();
 

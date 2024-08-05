@@ -68,6 +68,10 @@
             <input type="text" class="form-control" id="adress" name="adress" th:value="${student.adress}">
         </div>
         <div class="mb-3">
+            <label for="postalCode" class="form-label"th:text="#{postalCode}"></label>
+            <input type="number" class="form-control" id="postalCode" name="postalCode" th:value="${student.postalCode}">
+        </div>
+        <div class="mb-3">
             <label for="country" class="form-label"th:text="#{homeCountry}"></label>
             <input type="text" class="form-control" id="country" name="country" th:value="${student.country}">
         </div>

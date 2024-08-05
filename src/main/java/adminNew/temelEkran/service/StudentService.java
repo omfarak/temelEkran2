@@ -25,6 +25,10 @@ public class StudentService {
         oRepo.deleteById(id);
     }
 
+    public Student getStudentByEmail(String email){
+        return oRepo.findStudentByEmail(email);
+    }
+
     public Student getStudentById(int id){
         return oRepo.findById(id).get();
     }

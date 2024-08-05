@@ -135,6 +135,11 @@
                 <span class="text-success" th:text="'Left: ' + (${a.maxParticipants} - ${a.registeredParticipants})"></span>
                 <br>
                 <span class="text-danger" th:text="'Registered: ' + ${a.registeredParticipants}"></span>
+                <br>
+                <form th:action="@{/school/registeredStudents}" method="post">
+                    <input type="hidden" name="examId" th:value="${a.examId}" />
+                    <button type="submit" class="btn btn-success" th:text="#{registeredStudents}"></button>
+                </form>
             </td>
             <td th:text="${a.prufer.firstName + ' ' + a.prufer.lastName}"></td>
             <td class="date" th:text="${a.registrationDeadline}"></td>

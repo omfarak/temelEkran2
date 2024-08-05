@@ -2,6 +2,7 @@ package adminNew.temelEkran.service;
 
 import adminNew.temelEkran.entity.Exam;
 import adminNew.temelEkran.entity.Prufer;
+import adminNew.temelEkran.entity.Student;
 import adminNew.temelEkran.repository.ExamRepository;
 import adminNew.temelEkran.repository.PruferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,5 +101,22 @@ public class ExamService {
         return eRepo.findExamsBySchoolName(schoolName);
     }
 
+
+    public List<Exam> getExamsBySchoolNameAndCourse(String schoolName,String course){
+        return eRepo.findExamsBySchoolNameAndCourse(schoolName,course);
+    }
+    public List<Student> getRegisteredStudentsByExamId(int examId) {
+
+        Exam e = getExamById(examId);
+        List<Student> test = e.getRegisteredStudents();
+
+        System.out.println(test.get(0).getFirstName());
+
+
+
+        List<Student> l1 = eRepo.findRegisteredStudentsByExamId(examId);
+        System.out.println(l1.get(0).getId());
+        return l1;
+    }
 
 }

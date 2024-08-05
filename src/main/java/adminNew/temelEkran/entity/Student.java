@@ -26,6 +26,7 @@ public class Student {
     private String email;
     private String adress;
     private String country;
+    private int postalCode;
 
     @ManyToOne
     @JoinColumn(name = "exam_id")

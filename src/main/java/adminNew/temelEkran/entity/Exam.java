@@ -31,7 +31,7 @@ public class Exam {
     private int registeredParticipants;  // Kayıtlı öğrenci sayısı
     private boolean isActive;  // Sınavın aktif olup olmadığı
     private LocalDateTime registrationDeadline;  // Kayıt için son tarih
-    private String course;  // Sınavın ilişkili olduğu kurs (varsa)
+    private String course;  // Sınavın ilişkili olduğu seviye (varsa)
     private String language;  // Sınavın yapıldığı dil
     private String examMaterial;  // Sınav materyalleri
     private String status;  // Sınavın durumu (planlandı, tamamlandı, iptal edildi)
@@ -60,6 +60,9 @@ public class Exam {
     @ManyToOne
     @JoinColumn(name = "pruferId", referencedColumnName = "id")
     private Prufer prufer;
+
+
+
 
 
 //    @ManyToOne

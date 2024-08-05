@@ -65,6 +65,10 @@
             <label for="city" class="form-label" th:text="#{city}"></label>
             <input type="text" class="form-control" id="city" name="city" th:value="${school.city}">
         </div>
+        <div class="mb-3">
+            <label for="postal_code" class="form-label" th:text="#{postalCode}"></label>
+            <input type="number" class="form-control" id="postal_code" name="postal_code" th:value="${school.postal_code}">
+        </div>
 
         <button type="submit" class="btn btn-primary" th:text="#{save}"></button>
     </form>
