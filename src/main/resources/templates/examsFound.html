@@ -64,11 +64,11 @@
         </thead>
 
         <tbody>
-        <tr th:each="e, iterStat : ${exams}">
+        <tr th:each="e, iterStat : ${exams}" >
             <td th:text="${e.name}"></td>
             <td th:text="${e.date}"></td>
             <td th:text="${e.schoolName}"></td>
-            <td th:text="${schools[iterStat.index].adress}"></td>
+            <td th:text="${e.schoolAddress}"></td>
             <td th:text="${e.language}"></td>
             <td th:text="${e.description}"></td>
             <td th:text="${e.schriftlichSellingPrice}"></td>

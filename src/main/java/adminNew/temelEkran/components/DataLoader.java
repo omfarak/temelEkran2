@@ -94,6 +94,13 @@ public class DataLoader implements CommandLineRunner {
             school.setRoles(new HashSet<>(Collections.singletonList(schoolRole)));
             userRepository.save(school);
         }
+        if (userRepository.findByUsername("info@unitutor.de.admin") == null) {
+            User school = new User();
+            school.setUsername("info@unitutor.de.admin");
+            school.setPassword(passwordEncoder.encode("aydin1971"));
+            school.setRoles(new HashSet<>(Collections.singletonList(schoolAdminRole)));
+            userRepository.save(school);
+        }
         if (userRepository.findByUsername("testschool@gmail.com") == null) {
             User school = new User();
             school.setUsername("testschool@gmail.com");

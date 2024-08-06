@@ -47,7 +47,10 @@ public class SchoolAdminExamsController {
         String mail = authentication.getName();
         School school = sService.getSchoolByMail(mail);
         String schoolName = school.getName();
+        String adress = school.getAdress();
         e.setSchoolName(schoolName);
+        System.out.println("kanka adres = " + school.getAdress());
+        e.setSchoolAddress(adress);
         model.addAttribute("exam",e);
         return "addExamToTheList";
     }

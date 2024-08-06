@@ -105,6 +105,8 @@ public class SchoolExamsController {
         if (authentication != null) {
             model.addAttribute("username", schoolName);
             e.setSchoolName(schoolName);
+            System.out.println("abi adresim = " + school.getAdress());
+            e.setSchoolAddress(school.getAdress());
         }
 
         model.addAttribute("exam", e);

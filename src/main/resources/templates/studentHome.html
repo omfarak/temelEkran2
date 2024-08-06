@@ -36,6 +36,10 @@
         <h6 th:text="#{message5}" class="text-center my-5"></h6>
         <form class = "col-md-4 offset-md-4" th:action="@{/student/studentHome/save}" method="post">
             <div class="mb-3">
+                <label for="name" class="form-label" th:text="#{examType}"></label>
+                <input type="text" class="form-control" id="name" name="name" readonly th:value="${exam.name}">
+            </div>
+            <div class="mb-3">
                 <label for="adress" class="form-label" th:text="#{adress}"></label>
                 <input type="text" class="form-control" id="adress" name="adress" th:value="${student.adress}">
             </div>
@@ -52,10 +56,7 @@
                     <option value=100>100</option>
                 </select>
             </div>
-            <div class="mb-3">
-                <label for="name" class="form-label" th:text="#{examType}"></label>
-                <input type="text" class="form-control" id="name" name="name" readonly th:value="${exam.name}">
-            </div>
+
             <button type="submit" class="btn btn-primary" th:text="#{search}"></button>
         </form>
     </div>

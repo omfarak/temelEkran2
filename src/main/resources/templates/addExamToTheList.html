@@ -66,6 +66,10 @@
             <input type="text" class="form-control" id="schoolName" name="schoolName" readonly th:value="${exam.schoolName}">
         </div>
         <div class="mb-3">
+            <label for="schoolAddress" class="form-label" th:text="#{adress}"></label>
+            <input type="text" class="form-control" id="schoolAddress" name="schoolAddress" readonly th:value="${exam.schoolAddress}">
+        </div>
+        <div class="mb-3">
             <label for="schriftlichComissionFeePrice" class="form-label" th:text="#{schriftlichComissionFeePrice}"></label>
             <input type="number" class="form-control" id="schriftlichComissionFeePrice" name="schriftlichComissionFeePrice" readonly th:value="${exam.schriftlichComissionFeePrice}">
         </div>

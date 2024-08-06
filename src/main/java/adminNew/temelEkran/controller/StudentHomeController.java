@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 @RequestMapping("/student")
@@ -40,6 +39,7 @@ public class StudentHomeController {
     @GetMapping("/studentWelcome")
     public ModelAndView firstScreen(){
         List<Exam> list = eService.getAllDraftExam();
+        list.sort(Comparator.comparing(Exam::getName));
         return new ModelAndView("studentWelcome","exam",list);
     }
 

@@ -38,6 +38,7 @@ public class Exam {
     private LocalDateTime createdDate;  // Oluşturulma tarihi
     private LocalDateTime updatedDate;
     private String schoolName;
+    private String schoolAddress;
 
     private Boolean inMyList = false;
 
