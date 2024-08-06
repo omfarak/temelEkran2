@@ -13,6 +13,8 @@ public interface ExamRepository extends JpaRepository<Exam,Integer> {
     List<Exam> findExamsBySchoolName(String schoolName);
     List<Exam> findExamsBySchoolNameAndCourse(String schoolName,String course);
 
+    List<Exam> findExamsBySchoolNameAndName(String schoolName, String name);
+
     @Query("SELECT s FROM Student s JOIN s.exam e WHERE e.examId = :examId")
     List<Student> findRegisteredStudentsByExamId(int examId);
 }

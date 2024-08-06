@@ -53,16 +53,8 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label for="course" class="form-label" th:text="#{course}"></label>
-                <select class="form-control" id="course" name="course">
-                    <option th:text="#{pleaseSelect}"></option>
-                    <option value="A1" th:text="#{a1}"></option>
-                    <option value="A2" th:text="#{a2}"></option>
-                    <option value="B1" th:text="#{b1}"></option>
-                    <option value="B2" th:text="#{b2}"></option>
-                    <option value="C1" th:text="#{c1}"></option>
-                    <option value="C2" th:text="#{c2}"></option>
-                </select>
+                <label for="name" class="form-label" th:text="#{examType}"></label>
+                <input type="text" class="form-control" id="name" name="name" readonly th:value="${exam.name}">
             </div>
             <button type="submit" class="btn btn-primary" th:text="#{search}"></button>
         </form>

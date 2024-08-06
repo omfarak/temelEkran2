@@ -28,7 +28,8 @@ public class StudentSchoolService {
         return R * c;
     }
 
-    
+
+
     public List<School> getCloseSchools(int maxDistance, int postal_code){
         int i = 0;
         double distance = 0;

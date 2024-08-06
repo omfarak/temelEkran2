@@ -34,46 +34,51 @@ public class StudentHomeController {
     private StudentService sService;
     @Autowired
     private ExamStudentRegistrationService esrService;
+    @Autowired
+    private SchoolService schoolService;
 
-    @GetMapping("/studentHome")
-    public ModelAndView home(){
+    @GetMapping("/studentWelcome")
+    public ModelAndView firstScreen(){
+        List<Exam> list = eService.getAllDraftExam();
+        return new ModelAndView("studentWelcome","exam",list);
+    }
+
+    @PostMapping("/next")
+    public ModelAndView secondScreen(@RequestParam int examId){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String mail = authentication.getName();
         Student s = sService.getStudentByEmail(mail);
-        return new ModelAndView("studentHome","student",s);
+        Exam exam = eService.getExamById(examId);
+        ModelAndView modelAndView = new ModelAndView("studentHome");
+        modelAndView.addObject("exam",exam);
+        modelAndView.addObject("student",s);
+        return modelAndView;
     }
+
+
     @PostMapping("/studentHome/save")
-    public ModelAndView savePostalCode(@RequestParam Integer postalCode, @RequestParam Integer distance, @RequestParam String course,RedirectAttributes redirectAttributes) {
+    public ModelAndView savePostalCode(@RequestParam Integer postalCode, @RequestParam Integer distance, @RequestParam String name, RedirectAttributes redirectAttributes) {
         List<School> schools = ssService.getCloseSchools(distance, postalCode);
-        System.out.println("Bulunan okullar:");
-        for (School school : schools) {
-            System.out.println(school.getName());
-        }
-
         List<Exam> exams = new ArrayList<>();
-
+        List<School> examSchools = new ArrayList<>();
         for (School school : schools) {
-            List<Exam> schoolExams = eService.getExamsBySchoolNameAndCourse(school.getName(), course);
+            List<Exam> temp = eService.getExamsBySchoolNameAndName(school.getName(), name);
+            List<Exam> schoolExams = getMyActiveExams(temp);
             if (schoolExams != null && !schoolExams.isEmpty()) {
                 exams.addAll(schoolExams);
-                System.out.println("Okul: " + school.getName() + " için bulunan sınavlar:");
-                for (Exam exam : schoolExams) {
-                    System.out.println("Sınav Adı: " + exam.getName() + ", Tarih: " + exam.getDate());
-                }
-            } else {
-                System.out.println("No exams found for school: " + school.getName() + " and course: " + course);
+                examSchools.add(school);
             }
         }
+        ModelAndView modelAndView = new ModelAndView("examsFound");
         if (!exams.isEmpty()) {
-            System.out.println("Tüm bulunan sınavlar:");
-            for (Exam exam : exams) {
-                System.out.println("Sınav Adı: " + exam.getName() + ", Okul: " + exam.getSchoolName() + ", Tarih: " + exam.getDate());
-            }
+            modelAndView.addObject("exams", exams);
+            modelAndView.addObject("schools", examSchools);
         } else {
-            System.out.println("Hiçbir sınav bulunamadı.");
+            redirectAttributes.addFlashAttribute("errorMessage", "No exams found.");
+            modelAndView.setViewName("redirect:/student/studentHome");
         }
-        redirectAttributes.addFlashAttribute("exams", exams);
-        return new ModelAndView("examsFound","exams",exams);
+
+        return modelAndView;
     }
 
     @PostMapping("/registerExam")
@@ -95,7 +100,21 @@ public class StudentHomeController {
         else {
             redirectAttributes.addFlashAttribute("errorMessage", "Registration failed. The exam is full.");
         }
-        return "redirect:/student/studentHome";
+        return "redirect:/student/studentWelcome";
+    }
+
+    public List<Exam> getMyActiveExams(List<Exam> exams){
+        List<Exam> myListExams = new ArrayList<>();
+        int i = 0;
+        List<Exam> l = exams;
+        while(i < l.size()){
+            Exam e = l.get(i);
+            if(e.getDate() != null){
+                myListExams.add(e);
+            }
+            i++;
+        }
+        return myListExams;
     }
 
 }

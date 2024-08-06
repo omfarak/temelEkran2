@@ -33,7 +33,7 @@ public class SchoolService {
     }
 
     public School getSchoolByName(String name){
-        return sRepo.findSchoolByName(name);
+        return sRepo.findTopByName(name);
     }
 
     public School getSchoolByMail(String mail){

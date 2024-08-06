@@ -105,6 +105,10 @@ public class ExamService {
     public List<Exam> getExamsBySchoolNameAndCourse(String schoolName,String course){
         return eRepo.findExamsBySchoolNameAndCourse(schoolName,course);
     }
+
+    public List<Exam> getExamsBySchoolNameAndName(String schoolName,String name){
+        return eRepo.findExamsBySchoolNameAndName(schoolName,name);
+    }
     public List<Student> getRegisteredStudentsByExamId(int examId) {
 
         Exam e = getExamById(examId);
