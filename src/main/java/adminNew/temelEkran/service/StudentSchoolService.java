@@ -28,9 +28,7 @@ public class StudentSchoolService {
         return R * c;
     }
 
-
-    double ss;
-
+    
     public List<School> getCloseSchools(int maxDistance, int postal_code){
         int i = 0;
         double distance = 0;
@@ -47,6 +45,7 @@ public class StudentSchoolService {
             System.out.println("Döngüye Girdim: " + i + ". kez");
 
             School s = allSchool.get(i);
+            System.out.println(s.getPostal_code());
             Postal_code temp = pService.getAdressByPostalCode(s.getPostal_code());
             distance = calculateDistance(p.getLatitude().doubleValue(), p.getLongitude().doubleValue(),
                     temp.getLatitude().doubleValue(),temp.getLongitude().doubleValue());
