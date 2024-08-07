@@ -75,7 +75,7 @@
             <td th:text="${e.mundlicheSellingPrice}"></td>
             <td th:text="${e.gesamtlischeSellingPrice}"></td>
             <td>
-                <form th:action="@{/student/registerExam}" method="post">
+                <form th:action="@{/student/auth/registerExam}" method="post">
                     <input type="hidden" name="examId" th:value="${e.examId}" />
                     <button type="submit" class="btn btn-primary" th:text="#{register}"></button>
                 </form>

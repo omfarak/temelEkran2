@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -43,7 +44,8 @@ public class SecurityConfig {
                     auth.requestMatchers("/admin/**").hasRole("ADMIN");
                     auth.requestMatchers("/school/**").hasRole("SCHOOL");
                     auth.requestMatchers("/schoolADMIN/**").hasRole("SCHOOLADMIN");
-                    auth.requestMatchers("/student/**").hasRole("STUDENT");
+                    auth.requestMatchers("/student/auth/**").hasRole("STUDENT");
+                    auth.requestMatchers("/student/**").permitAll();
                     auth.anyRequest().authenticated();
                 })
                 .formLogin(form -> form

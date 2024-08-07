@@ -30,11 +30,11 @@ public class StudentHomeController {
     @Autowired
     private ExamService eService;
     @Autowired
-    private StudentService sService;
-    @Autowired
     private ExamStudentRegistrationService esrService;
     @Autowired
     private SchoolService schoolService;
+    @Autowired
+    private StudentService sService;
 
     @GetMapping("/studentWelcome")
     public ModelAndView firstScreen(){
@@ -45,13 +45,10 @@ public class StudentHomeController {
 
     @PostMapping("/next")
     public ModelAndView secondScreen(@RequestParam int examId){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String mail = authentication.getName();
-        Student s = sService.getStudentByEmail(mail);
+
         Exam exam = eService.getExamById(examId);
         ModelAndView modelAndView = new ModelAndView("studentHome");
         modelAndView.addObject("exam",exam);
-        modelAndView.addObject("student",s);
         return modelAndView;
     }
 
@@ -81,13 +78,21 @@ public class StudentHomeController {
         return modelAndView;
     }
 
-    @PostMapping("/registerExam")
+    @GetMapping("/auth/studentSuccess")
+    public String getSuccess(){
+        return "studentSuccess";
+    }
+
+
+    @PostMapping("/auth/registerExam")
     public String registerExam(@RequestParam("examId") int examId, RedirectAttributes redirectAttributes){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String mail = authentication.getName();
         Student s = sService.getStudentByEmail(mail);
         Exam e = eService.getExamById(examId);
+        System.out.println("kanka daha girmedim");
         if(e.getRegisteredParticipants() < e.getMaxParticipants()){
+            System.out.println("kanka kaydetmek içi n geldim valla!");
             s.setExam(e);
             e.setRegisteredParticipants(e.getRegisteredParticipants() + 1);
             ExamStudentRegistration reg = new ExamStudentRegistration();
@@ -98,9 +103,10 @@ public class StudentHomeController {
 
         }
         else {
+            System.out.println("kanka else e geldim haberin olsun");
             redirectAttributes.addFlashAttribute("errorMessage", "Registration failed. The exam is full.");
         }
-        return "redirect:/student/studentWelcome";
+        return "redirect:student/auth/studentSuccess";
     }
 
     public List<Exam> getMyActiveExams(List<Exam> exams){
