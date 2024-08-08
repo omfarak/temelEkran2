@@ -22,7 +22,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             response.sendRedirect("/school/home");
         }
         else if(authentication.getAuthorities().contains((new SimpleGrantedAuthority("ROLE_STUDENT")))){
-            response.sendRedirect("student/auth/studentSuccess");
+            //response.sendRedirect("student/auth/studentSuccess");
         }
     }
 }

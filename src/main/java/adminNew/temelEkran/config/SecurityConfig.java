@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -41,11 +43,11 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/").permitAll();
+                    auth.requestMatchers("/student/**").permitAll();
+                    auth.requestMatchers("/error").permitAll();
                     auth.requestMatchers("/admin/**").hasRole("ADMIN");
                     auth.requestMatchers("/school/**").hasRole("SCHOOL");
                     auth.requestMatchers("/schoolADMIN/**").hasRole("SCHOOLADMIN");
-                    auth.requestMatchers("/student/auth/**").hasRole("STUDENT");
-                    auth.requestMatchers("/student/**").permitAll();
                     auth.anyRequest().authenticated();
                 })
                 .formLogin(form -> form

@@ -5,12 +5,8 @@ import adminNew.temelEkran.entity.Exam;
 import adminNew.temelEkran.entity.ExamStudentRegistration;
 import adminNew.temelEkran.entity.School;
 import adminNew.temelEkran.entity.Student;
-import adminNew.temelEkran.repository.ExamStudentRegistrationRepository;
 import adminNew.temelEkran.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -78,15 +74,13 @@ public class StudentHomeController {
         return modelAndView;
     }
 
-    @GetMapping("/auth/studentSuccess")
-    public String getSuccess(){
-        return "studentSuccess";
-    }
-
-
-    @PostMapping("/auth/registerExam")
-    public String registerExam(@RequestParam("examId") int examId, RedirectAttributes redirectAttributes){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    @RequestMapping("/registerExam/{id}")
+    public ModelAndView registerExam(@PathVariable("id") int id, @RequestParam("examId") int examId, RedirectAttributes redirectAttributes){
+        Exam e = eService.getExamById(examId);
+        ModelAndView modelAndView = new ModelAndView("saveStudent");
+        modelAndView.addObject("exam",e);
+        return modelAndView;
+       /* Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String mail = authentication.getName();
         Student s = sService.getStudentByEmail(mail);
         Exam e = eService.getExamById(examId);
@@ -106,7 +100,39 @@ public class StudentHomeController {
             System.out.println("kanka else e geldim haberin olsun");
             redirectAttributes.addFlashAttribute("errorMessage", "Registration failed. The exam is full.");
         }
-        return "redirect:student/auth/studentSuccess";
+        return "redirect:student/deneme";
+        */
+    }
+
+    @PostMapping("/studentSave")
+    public String save(@RequestParam("id") int examId,
+                       @RequestParam("firstName") String firstName,
+                       @RequestParam("lastName") String lastName,
+                       @RequestParam("birthDate") String birthDate,
+                       @RequestParam("phone") String phone,
+                       @RequestParam("email") String email,
+                       @RequestParam("country") String country,
+                       RedirectAttributes redirectAttributes){
+
+        Exam e = eService.getExamById(examId);
+        Student s = Student.builder()
+                .firstName(firstName)
+                .lastName(lastName)
+                .birthDate(birthDate)
+                .phone(phone)
+                .email(email)
+                .country(country)
+                .build();
+        sService.save(s);
+        ExamStudentRegistration esr = new ExamStudentRegistration();
+        esr.setExam(e);
+        esr.setStudent(s);
+        return "redirect:/student/paymentScreen";
+    }
+
+    @GetMapping("/paymentScreen")
+    public String publicScreen(){
+        return "/paymentScreen";
     }
 
     public List<Exam> getMyActiveExams(List<Exam> exams){
