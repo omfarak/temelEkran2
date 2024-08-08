@@ -127,6 +127,7 @@ public class StudentHomeController {
         ExamStudentRegistration esr = new ExamStudentRegistration();
         esr.setExam(e);
         esr.setStudent(s);
+        esrService.save(esr);
         return "redirect:/student/paymentScreen";
     }
 
