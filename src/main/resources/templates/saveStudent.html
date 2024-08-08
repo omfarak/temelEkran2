@@ -27,6 +27,7 @@
     <form class="col-md-4 offset-md-4" th:action="@{/student/studentSave}" method="post">
 
         <input type ="hidden" name ="id" id="id" th:value="${exam.examId}">
+        <input type="hidden" name="examType" id="examType" th:value="${examType}">
         <div class="mb-3">
             <label for="firstName" class="form-label" th:text="#{name}"></label>
             <input type="text" class="form-control" id="firstName" name="firstName">
@@ -48,10 +49,10 @@
             <input type="email" class="form-control" id="email" name="email">
         </div>
         <div class="mb-3">
-            <label for="country" class="form-label"th:text="#{homeCountry}"></label>
+            <label for="country" class="form-label" th:text="#{homeCountry}"></label>
             <input type="text" class="form-control" id="country" name="country">
         </div>
-        <button type="submit" class="btn btn-primary"th:text="#{save}"></button>
+        <button type="submit" class="btn btn-primary" th:text="#{save}"></button>
     </form>
 </div>
 

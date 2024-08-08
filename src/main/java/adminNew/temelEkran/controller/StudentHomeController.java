@@ -75,10 +75,16 @@ public class StudentHomeController {
     }
 
     @RequestMapping("/registerExam/{id}")
-    public ModelAndView registerExam(@PathVariable("id") int id, @RequestParam("examId") int examId, RedirectAttributes redirectAttributes){
+    public ModelAndView registerExam(
+            @PathVariable("id") int id,
+            @RequestParam("examId") int examId,
+            @RequestParam("examType") int examType,
+            RedirectAttributes redirectAttributes){
         Exam e = eService.getExamById(examId);
         ModelAndView modelAndView = new ModelAndView("saveStudent");
         modelAndView.addObject("exam",e);
+        modelAndView.addObject("examType",examType);
+
         return modelAndView;
        /* Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String mail = authentication.getName();
@@ -105,13 +111,14 @@ public class StudentHomeController {
     }
 
     @PostMapping("/studentSave")
-    public String save(@RequestParam("id") int examId,
+    public ModelAndView save(@RequestParam("id") int examId,
                        @RequestParam("firstName") String firstName,
                        @RequestParam("lastName") String lastName,
                        @RequestParam("birthDate") String birthDate,
                        @RequestParam("phone") String phone,
                        @RequestParam("email") String email,
                        @RequestParam("country") String country,
+                       @RequestParam("examType") int examType,
                        RedirectAttributes redirectAttributes){
 
         Exam e = eService.getExamById(examId);
@@ -128,12 +135,16 @@ public class StudentHomeController {
         esr.setExam(e);
         esr.setStudent(s);
         esrService.save(esr);
-        return "redirect:/student/paymentScreen";
+        ModelAndView modelAndView = new ModelAndView("lastVerification");
+        modelAndView.addObject("exam",e);
+        modelAndView.addObject("student",s);
+        modelAndView.addObject("examType",examType);
+        return modelAndView;
     }
 
-    @GetMapping("/paymentScreen")
+    @GetMapping("/lastVerification")
     public String publicScreen(){
-        return "/paymentScreen";
+        return "/lastVerification";
     }
 
     public List<Exam> getMyActiveExams(List<Exam> exams){
@@ -148,6 +159,10 @@ public class StudentHomeController {
             i++;
         }
         return myListExams;
+    }
+    @GetMapping("/payment")
+    public String payment(){
+        return "/payment";
     }
 
 }

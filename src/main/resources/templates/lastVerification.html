@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Exam Details</title>
+    <style>
+        .table-container {
+            min-height: 400px; /* Aynı yükseklik */
+        }
+        .table-container table {
+            height: 100%;
+        }
+
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const formatDate = (dateString) => {
+                const date = new Date(dateString);
+                const day = String(date.getDate()).padStart(2, '0');
+                const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+                const year = date.getFullYear();
+                const hours = String(date.getHours()).padStart(2, '0');
+                const minutes = String(date.getMinutes()).padStart(2, '0');
+
+                return `${day}-${month}-${year} ${hours}:${minutes}`;
+            };
+
+            document.querySelectorAll('.date').forEach(el => {
+                el.textContent = formatDate(el.textContent.trim());
+            });
+
+            // Checkbox validation
+            document.getElementById('buyButton').addEventListener('click', function (event) {
+                const check1 = document.getElementById('check1').checked;
+                const check2 = document.getElementById('check2').checked;
+
+                if (!check1 || !check2) {
+                    event.preventDefault();
+                    alert('Please check both checkboxes to proceed.');
+                } else {
+                    location.href = '/student/payment';
+                }
+            });
+        });
+            function redirectToContract() {
+            window.location.href = "https://www.orneksozlesme.com";
+        }
+    </script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/student/studentWelcome">Home Page</a>
+    </div>
+</nav>
+
+<div class="container my-5">
+    <h4 class="text-center my-6">Exam Details</h4>
+
+    <div class="row">
+        <div class="col-md-6 table-container">
+            <h5 class="text-center p-5" th:text="#{examInfo}"></h5>
+            <table class="table table-bordered h-100">
+                <tbody>
+                <tr>
+                    <th th:text="#{examName}"></th>
+                    <td th:text="${exam.name}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{description}"></th>
+                    <td th:text="${exam.description}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{duration}"></th>
+                    <td th:text="${exam.duration}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{adress}"></th>
+                    <td th:text="${exam.schoolAddress}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{course}" ></th>
+                    <td th:text="${exam.course}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{language}"></th>
+                    <td th:text="${exam.language}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{examType}"></th>
+                    <td th:if="${examType == 1}" th:text="#{schriftlichExam}"></td>
+                    <td th:if="${examType == 2}" th:text="#{mundlichExam}"></td>
+                    <td th:if="${examType == 3}" th:text="#{gesamtlischExam}"></td>
+
+                </tr>
+                <tr>
+                    <th th:text="#{price}"></th>
+                    <td th:if="${examType == 1}" th:text="${exam.schriftlichSellingPrice + ' EUR'}"></td>
+                    <td th:if="${examType == 2}" th:text="${exam.mundlicheSellingPrice + ' EUR'}"></td>
+                    <td th:if="${examType == 3}" th:text="${exam.gesamtlischeSellingPrice + ' EUR'}"></td>
+
+                </tr>
+                <tr>
+                    <th th:text="#{date}" ></th>
+                    <td class="date" th:text="${exam.date}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-6 table-container">
+            <h5 class="text-center p-5" th:text="#{personelInfo}"></h5>
+            <table class="table table-bordered h-100">
+                <tbody>
+                <tr th:each="student : ${student}">
+                    <th th:text="#{name}"></th>
+                    <td th:text="${student.firstName}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{surname}"></th>
+                    <td th:text="${student.lastName}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{birthdate}"></th>
+                    <td th:text="${T(java.time.LocalDate).parse(student.birthDate).format(T(java.time.format.DateTimeFormatter).ofPattern('dd.MM.yyyy'))}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{phone}"></th>
+                    <td th:text="${student.phone}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{email}"></th>
+                    <td th:text="${student.email}"></td>
+                </tr>
+                <tr>
+                    <th th:text="#{homeCountry}"></th>
+                    <td th:text="${student.country}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+
+    <div class="my-5 p-5">
+        <div class="row mt-5">
+            <div class="col-md-6 offset-md-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="check1">
+                    <label class="form-check-label" for="check1" onclick="redirectToContract()">
+                        I accept the contract<span class="text-primary" style="cursor:pointer;">(Read the Contract)</span>
+                    </label>
+                </div>
+                <div class="form-check mt-3">
+                    <input class="form-check-input" type="checkbox" id="check2">
+                    <label class="form-check-label" for="check2">
+                        I confirmed exam and personal details.
+                    </label>
+                </div>
+                <button id="buyButton" class="btn btn-primary mt-4 w-100">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>

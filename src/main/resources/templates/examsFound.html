@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xml:th="https://www.thymelaf.com">
+<html lang="en" xml:th="https://www.thymeleaf.org">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -31,6 +31,11 @@
             const price = selectedOption.getAttribute('data-price');
             selectElement.nextElementSibling.textContent = price ? `Price: ${price}` : '';
         }
+
+        function updateExamType(selectElement) {
+            const form = selectElement.closest('form');
+            form.querySelector('input[name="examType"]').value = selectElement.value; // Güncel seçimi hidden input'a ata
+        }
     </script>
 </head>
 <body>
@@ -60,7 +65,6 @@
             <th scope="col" th:text="#{schoolName}"></th>
             <th scope="col" th:text="#{adress}"></th>
             <th scope="col" th:text="#{examType}"></th>
-            <th scope="col" th:text="#{register}"></th>
         </tr>
         </thead>
 
@@ -71,18 +75,19 @@
             <td th:text="${e.schoolName}"></td>
             <td th:text="${e.schoolAddress}"></td>
             <td>
-                <select class="form-select" onchange="updatePrice(this)">
-                    <option th:value="${e.schriftlichSellingPrice}" th:text="#{schriftlich}" th:attr="data-price=${e.schriftlichSellingPrice}"></option>
-                    <option th:value="${e.mundlicheSellingPrice}" th:text="#{mundlich}" th:attr="data-price=${e.mundlicheSellingPrice}"></option>
-                    <option th:value="${e.gesamtlischeSellingPrice}" th:text="#{gesamtlisch}" th:attr="data-price=${e.gesamtlischeSellingPrice}"></option>
-                </select>
-                <span class="price"></span>
-            </td>
-            <td>
-                <form th:action="@{/student/registerExam/{id}(id=${e.examId})}">
+                <form th:action="@{/student/registerExam/{id}(id=${e.examId})}" method="post">
+                    <select class="form-select" name="examType" onchange="updatePrice(this); updateExamType(this)">
+                        <option th:text="#{pleaseSelect}"></option>
+                        <option value="1" th:text="#{schriftlich}" th:attr="data-price=${e.schriftlichSellingPrice}"></option>
+                        <option value="2" th:text="#{mundlich}" th:attr="data-price=${e.mundlicheSellingPrice}"></option>
+                        <option value="3" th:text="#{gesamtlisch}" th:attr="data-price=${e.gesamtlischeSellingPrice}"></option>
+                    </select>
+                    <span class="price"></span>
                     <input type="hidden" name="examId" th:value="${e.examId}"/>
-                    <input type="hidden" name="examType" value="">
-                    <button type="submit" class="btn btn-primary" th:text="#{register}"></button>
+                    <input type="hidden" name="examType" value=""/>
+                    <div class="text-end mt-2">
+                        <button type="submit" class="btn btn-primary" th:text="#{register}"></button>
+                    </div>
                 </form>
             </td>
         </tr>
